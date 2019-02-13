@@ -23,11 +23,12 @@ INSERT DIAGRAM OF VALENTER
 
 ## Authors
 
-* **Carolina Inácio Pereira** - [Blockchain](https://gitlab.epai-ict.ch/m526/lorawan-blockchain)
+* **Frédéric Mauron** - *Teacher*
+* **Carolina Inácio Pereira** - *Blockchain constructor*
 * **Noah Godel** - *Front-end and user interface (AngluarJS)*
 * **Valentin Roch** - *LoRaWAN Communication and Arduino*
 * **Cyril Buchs** - *Author of the documentation*
 
 ## Acknowledgments
 
-* This project was made for the IIFF Hackathon. The project leader is **Roman Porini**.
+* This project was made for the IIFF Hackathon. The project leader is **Roman Eyholzer**.
