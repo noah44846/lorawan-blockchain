@@ -13,6 +13,7 @@ git clone https://gitlab.epai-ict.ch/m526/lorawan-blockchain.git
 ## How it works
 Here is a diagram showing how the project works :
 
+INSERT DIAGRAM OF VALENTER
 
 ## Built with
 
@@ -22,9 +23,10 @@ Here is a diagram showing how the project works :
 
 ## Authors
 
-* **Carolina Inácio Pereira** - *Initial work* - [Blockchain](https://gitlab.epai-ict.ch/m526/lorawan-blockchain)
+* **Carolina Inácio Pereira** - [Blockchain](https://gitlab.epai-ict.ch/m526/lorawan-blockchain)
 * **Noah Godel** - *Front-end and user interface (AngluarJS)*
 * **Valentin Roch** - *LoRaWAN Communication and Arduino*
+* **Cyril Buchs** - *Author of the documentation*
 
 ## Acknowledgments
 
