@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { LorawanNode } from '../lorawan-node';
 import { LorawanNodeService } from '../lorawan-node.service';
 
 @Component({
@@ -9,11 +8,11 @@ import { LorawanNodeService } from '../lorawan-node.service';
   styleUrls: ['./lorawan-nodes.component.css']
 })
 export class LorawanNodesComponent implements OnInit {
-    lorawanNodes: LorawanNode[];
+    lorawanNodeIds: number[];
 
     constructor(private lorawanNodeService: LorawanNodeService) {}
 
     ngOnInit(): void {
-        this.lorawanNodes = this.lorawanNodeService.getNodes();
+        this.lorawanNodeIds = this.lorawanNodeService.getNodeIds();
     }
 }

@@ -30,7 +30,7 @@ export class LorawanNodeDetailComponent implements OnInit {
 
     ngOnInit() {
         this.getLorawanNode();
-        this.mapInit(this.lorawanNode.pos);
+        this.mapInit(this.lorawanNode.posArr);
     }
 
     getLorawanNode(): void {
