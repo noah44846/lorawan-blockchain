@@ -1,0 +1,7 @@
+<nav>
+    <ul>
+        <li *ngFor="let lorawanNode of lorawanNodes">
+            <a routerLink="/detail/{{lorawanNode.id}}">Node with id {{lorawanNode.id}}</a>
+        </li>
+    </ul>
+</nav>
