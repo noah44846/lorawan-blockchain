@@ -10,6 +10,11 @@ You will need to install the software by cloning the repository (master branch)
 git clone https://gitlab.epai-ict.ch/m526/lorawan-blockchain.git
 ```
 
+## How it works
+Here is a diagram showing how the project works :
+
+(Insert Diagram)
+
 ## Built with
 
 * [Blockchain](https://courses.blockgeeks.com/course) (courses CE101, BTC101, ETH101 and ETH102) - The method to control unicity of the entered data 
