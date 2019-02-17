@@ -1,0 +1,15 @@
+#map {
+    width: 80%;
+    margin: 1.8rem auto;
+}
+
+button {
+    display: block;
+    margin: 1.5rem auto;
+    padding: 0.8rem 1.2rem;
+    font-size: 1.6rem;
+}
+
+h2 {
+    text-align: center;
+}

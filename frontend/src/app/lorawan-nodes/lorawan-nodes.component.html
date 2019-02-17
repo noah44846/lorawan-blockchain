@@ -1,0 +1,9 @@
+<mat-card>
+    <button
+        *ngFor="let id of lorawanNodeIds"
+        color="primary"
+        mat-raised-button
+        routerLink="/detail/{{id}}">
+        Node with id {{id}}
+    </button>
+</mat-card>
