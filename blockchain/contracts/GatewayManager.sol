@@ -4,7 +4,7 @@ pragma solidity ^0.5.0;
  * This contract allows the user to manage the different LoRa gateways, nodes and data sent by hem
  */
 contract GatewayManager {
-    address owner;
+    address public owner;
      
     
     constructor() payable public {
@@ -33,14 +33,14 @@ contract GatewayManager {
         bool authorized;
     }
     
-    mapping(address => Gateway) internal gatewayMapping; //Maps a gateway address to its Gateway object instance
-    mapping(address => Admin) internal adminMapping; //Maps an admin address to its Admin object instance
-    mapping(address => Node) internal nodeMapping; //Maps a node address to a Node object instance
-    mapping(address => address) internal nodeGatewayMapping; //Maps a node address to its associated gateway address
+    mapping(address => Gateway) public gatewayMapping; //Maps a gateway address to its Gateway object instance
+    mapping(address => Admin) public adminMapping; //Maps an admin address to its Admin object instance
+    mapping(address => Node) public nodeMapping; //Maps a node address to a Node object instance
+    mapping(address => address) public nodeGatewayMapping; //Maps a node address to its associated gateway address
     
-    address[] admins;
-    address[] gateways;
-    address[] nodes; //Note: Every node (LoRa emitter) will have an address to identifiy them, even if the account isn't used
+    address[] public admins;
+    address[] public gateways;
+    address[] public nodes; //Note: Every node (LoRa emitter) will have an address to identifiy them, even if the account isn't used
     
     enum AccountHolder {
         OWNER,
@@ -50,8 +50,9 @@ contract GatewayManager {
         NULL
     }
 
+    
+    event AdminAdded(string name, address addr);
     /*
-    //event AdminAdded(string name, address addr);
     event AdminRemoved(string name, address addr);
     
     event GatewayAdded(string name, string gatewayEUI, address addr);
@@ -93,7 +94,7 @@ contract GatewayManager {
         _;
     }
 
-    function getAdminInfo(address _addr) public view returns (string memory name) {
+    /*function getAdminInfo(address _addr) public view returns (string memory name) {
         Admin memory a = adminMapping[_addr];
         
         if(!a.authorized) {
@@ -118,7 +119,7 @@ contract GatewayManager {
         }
         
         return (n.id, n.devEUI, nodeGatewayMapping[_addr]);
-    }
+    }*/
     
     function isAdmin(address _addr) public view returns (bool) {
         return adminMapping[_addr].authorized;
@@ -147,7 +148,7 @@ contract GatewayManager {
             b = true;
         } else if(isNode(_addr)) {
             who = AccountHolder.NODE;
-            b  = true;
+            b = true;
         } else {
             who = AccountHolder.NULL;
             b = false;
@@ -215,7 +216,7 @@ contract GatewayManager {
         admins.push(_addr);
         adminMapping[_addr] = a;
 
-        ////emit AdminAdded(_name, _addr);
+        emit AdminAdded(_name, _addr);
     }
     
     function registerGateway(string memory _name, string memory _gatewayEUI, address _addr) public adminAction notAssigned(_addr) {
@@ -226,7 +227,7 @@ contract GatewayManager {
         //emit GatewayAdded(_name, _gatewayEUI, _addr);
     }
     
-    function registerNode(address _nodeAddr, string memory _devEUI, string memory _id, address _gatewayAddr) public adminAction
+    function registerNode( string memory _id, string memory _devEUI, address _nodeAddr, address _gatewayAddr) public adminAction
     notAssigned(_nodeAddr) {
         //Check if gateway exists
         require(isGateway(_gatewayAddr), "The address given is not a gateway address or the gateway is not yet registered");
@@ -339,7 +340,7 @@ contract GatewayManager {
      * (http://cryptodir.blogspot.com.tr/2016/03/solidity-concat-string.html)
      */
     function strConcat(string memory _a, string memory _b, string memory _c, string memory _d, string memory _e)
-    public pure returns (string memory){
+    internal pure returns (string memory){
         bytes memory _ba = bytes(_a);
         bytes memory _bb = bytes(_b);
         bytes memory _bc = bytes(_c);
@@ -373,7 +374,7 @@ contract GatewayManager {
     /**
      * Helper function to compare strings
      */
-    function compareStrings(string memory a, string memory b) public pure returns (bool){
+    function compareStrings(string memory a, string memory b) internal pure returns (bool){
         bytes memory aBytes = bytes(a);
         bytes memory bBytes = bytes(b);
         return keccak256(aBytes) == keccak256(bBytes);

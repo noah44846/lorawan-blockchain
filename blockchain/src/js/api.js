@@ -1,3 +1,7 @@
+/**
+ * This NodeJS api would allow the AngularJS front-end to interact with the "GatewayManager" smart contract 
+ * in order to retrieve node GPS data to display on the map
+ */
 //GetAllNodes using getAllNodeAddresses + getNodeInfo
 
 // Import libraries
@@ -16,9 +20,9 @@ MyContract.setProvider(provider);
 
 // Use Truffle as usual
 MyContract.deployed().then(function (instance) {
-    return instance.owner.call({ from: "0x6589F246e977EAc11199EF81Ba7FDD6995Fe6500" });
+    return instance.owner.call({ from: accounts[0] });
 }).then(function (result) {
     console.log(result);
-}, function (error) {
-    console.log(error);
+}).catch(function (err) {
+    console.log(err);
 });
