@@ -59,3 +59,5 @@ node ./src/js/api.js
 * Browser crashes in Remix IDE when sending node data containing strings with length over 0. (Ideally, gateway information, node information and node location data would be stored using swarm and accessed using a smart contract)
 * Had to set gas limit in Remix IDE from 3000000 to 4000000 to be able to deploy the contract
 * Contract interactions as well as contract deployment are too costly
+* Gateway/Node identification information that is represented by a string is not verified (for example, the devEUI of a node should have the format "XX:XX:XX:XX:XX:XX:XX", where "X" can be whether a letter or a number, but any string can be used)
+* There's still a link between a gateway and its nodes when the gateway is removed
