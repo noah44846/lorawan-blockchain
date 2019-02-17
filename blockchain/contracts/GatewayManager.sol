@@ -23,7 +23,8 @@ contract GatewayManager {
         string devEUI; //unique identifier
         
         //Array of strings in format "%timestamp%, %GPS coordinates%, %batteryLevel%"
-        // %location% = "(Latitude, Longitude, Altitude)"
+        //%location% = "(Latitude, Longitude, Altitude)"
+        //Altitude is represented in meters
         string[] locationHistory;
         bool registered;
     }
@@ -161,6 +162,8 @@ contract GatewayManager {
      * Returns the address of the gateway associated to this node
      */
     function getAssociatedGateway(address _nodeAddr) public view returns(address) {
+        //Checks if the given address is a node address
+        require(isNode(_nodeAddr), "Address given is not a node address or the node is not yet registered");
         return nodeGatewayMapping[_nodeAddr];
     }
     
@@ -171,6 +174,10 @@ contract GatewayManager {
         //Checks if the given address is a gateway address
         require(isGateway(_gatewayAddr), "Address given is not a gateway address or the gateway is not yet registered");
         return gatewayMapping[_gatewayAddr].nodes;
+    }
+
+    function getAllAdminAddresses() public view returns(address[] memory) {
+        return admins;
     }
 
     function getAllGatewayAddresses() public view returns(address[] memory) {
@@ -249,10 +256,8 @@ contract GatewayManager {
         //Check if account is admin
         require(isAdmin(_addr), "The given address isn't an admin account or admin already removed.");
 
-        Admin memory a = adminMapping[_addr];
+        Admin storage a = adminMapping[_addr];
         a.authorized = false;
-
-        admins.push(_addr);
         
         //remove admin's address from "admins" array
         for(uint i = 0; i < admins.length; i += 1) {
@@ -273,7 +278,7 @@ contract GatewayManager {
         //Check if gateway exists
         require(gatewayMapping[_addr].registered, "The given address isn't a gateway address or gateway is already removed");
         //Change ggateway "registered" to false
-        Gateway memory g = gatewayMapping[_addr];
+        Gateway storage g = gatewayMapping[_addr];
         g.registered = false;
         
         //remove gateway's address from "gateways" list
@@ -295,7 +300,7 @@ contract GatewayManager {
         //Check if node exists
         require(nodeMapping[_nodeAddr].registered, "The given address isn't a node address or node is already removed");
         //Change node "registered" to false
-        Node memory n = nodeMapping[_nodeAddr];
+        Node storage n = nodeMapping[_nodeAddr];
         n.registered = false;
         
         //Remove node's address from "nodes" list
@@ -307,9 +312,11 @@ contract GatewayManager {
                 nodes[i] = nodes[i-1];
             }
         }
+
+        nodes.length -= 1;
         
         //Remove node from associated gateway's "nodes" list
-        address[] memory _nodes = gatewayMapping[nodeGatewayMapping[_nodeAddr]].nodes;
+        address[] storage _nodes = gatewayMapping[nodeGatewayMapping[_nodeAddr]].nodes;
         for(uint i = 0; i < _nodes.length; i += 1) {
             uint index;
             
@@ -319,6 +326,8 @@ contract GatewayManager {
                 _nodes[i] = _nodes[i-1];
             }
         }
+
+        _nodes.length -= 1;
         
         //emit NodeRemoved(n.id, n.devEUI, _nodeAddr, nodeGatewayMapping[_nodeAddr]);
     }
