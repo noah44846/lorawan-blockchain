@@ -36,7 +36,6 @@ export class LorawanNodeDetailComponent implements OnInit {
     getLorawanNode(): void {
         const id = +this.route.snapshot.paramMap.get('id');
         this.lorawanNode = this.lorawanNodeService.getNode(id);
-        // console.log(this.lorawanNodeService.getNode(id));
     }
 
     goBack(): void {

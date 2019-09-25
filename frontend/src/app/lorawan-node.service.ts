@@ -6,6 +6,7 @@ import { LorawanNode } from './lorawan-node';
     providedIn: 'root'
 })
 export class LorawanNodeService {
+    // Test data
     lorawanNodes: LorawanNode[] = [
         {
             id: 1,
@@ -52,10 +53,19 @@ export class LorawanNodeService {
     }
 
     getNode(id: number): LorawanNode {
+        // should be the code to get the data from the blockechain
+        // but somehow the code doesn't work but I don't know why
+        // return (LorawanNode) Blockchain.getDataById(id, "pleeeease!");
+
+        // code for test data
         return this.lorawanNodes.find(lorawanNode => lorawanNode.id === id);
     }
 
     getNodeIds(): number[] {
+        // same here
+        // return (number[]) Blockchain.getData("pleeeease!").map(node => node.id);
+
+        // code for test data
         return this.lorawanNodes.map(node => node.id);
     }
 }
